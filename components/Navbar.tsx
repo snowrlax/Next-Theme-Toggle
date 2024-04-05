@@ -2,10 +2,12 @@
 
 import { ThemeContext } from "@/context/ThemeProvider"
 import Link from "next/link"
-import { useContext } from "react"
+import { useContext, useState } from "react"
 
 export const Navbar = () => {
-    const { changeTheme } = useContext(ThemeContext)
+    const { changeTheme, theme } = useContext(ThemeContext)
+    const [toggleTheme, setToggleTheme] = useState(theme === "light" ? true : false)
+
     return <div className="navbar bg-base-100">
         <div className="navbar-start">
             <div className="dropdown">
@@ -23,7 +25,10 @@ export const Navbar = () => {
         <div className="navbar-end hidden lg:flex">
 
             {/* // toggle button */}
-            <div className="" onClick={() => {changeTheme('cupcake')}}>
+            <div className="" onClick={() => {
+                changeTheme(!toggleTheme) 
+                setToggleTheme(!toggleTheme)
+                }}>
                 <label className="swap swap-rotate mr-3">
 
                     {/* this hidden checkbox controls the state */}
