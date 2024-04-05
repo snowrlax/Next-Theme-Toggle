@@ -11,25 +11,26 @@ interface ThemeContextInterface {
 export const ThemeContext = createContext<ThemeContextInterface>({});
 
 export const ThemeProvider = ({ children }: any) => {
-    const [theme, setTheme] = useState( () => localStorage.getItem('theme') || "dark" )
-    const [loading, setLoading] = useState(false)
-
-    useEffect(() => {
-        setLoading(true)
-        const storedTheme = localStorage.setItem("theme", theme)
-    }, [theme])
+    const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark')
+    console.log("inside themeprovider : " + theme)
+    const [loading, setLoading] = useState(true)
     
-    if(!loading) {
+    useEffect(() => {
+        setLoading(false);
+        const storedTheme = localStorage.getItem('theme') || "dark";
+        setTheme(storedTheme)
+    }, []);
+    
+    if(loading) {
         return <div className="">
             loading...
         </div>
     }
 
     const changeTheme = (nextTheme: boolean) => {
-        const stringTheme = nextTheme ? "dark" : "light"
+        const stringTheme = nextTheme ? "light" : "dark"
         setTheme(stringTheme)
         localStorage.setItem("theme", stringTheme)
-
     }
 
     return (

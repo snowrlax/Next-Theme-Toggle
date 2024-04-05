@@ -15,6 +15,7 @@ export const Card = () => {
 
         <button className="btn btn-primary" onClick={() => {
           setToggle(!toggle)
+          console.log(toggle)
           toggleTheme(toggle)
         }}>Toggle theme</button>
       </div>
